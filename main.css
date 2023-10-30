@@ -78,8 +78,29 @@ body{
   opacity: 1;
 }
 
-#app {
+#dumbleDiv:hover {
+  border: 6px solid #e09c09;
+  margin: 1px;
+}
+
+#voldyDiv:hover {
+  border: 6px solid silver;
+  margin: 1px;
+}
+
+#hogwarts {
   border: 6px solid yellow;
+  margin: 5%;
+  margin-block: 3px;
+  display: flex;
+  flex-flow: wrap;
+  padding: 20px;
+  justify-content: space-around;
+}
+
+#voldys {
+  border: 6px solid antiquewhite;
+  margin: 5%;
   margin-block: 3px;
   display: flex;
   flex-flow: wrap;
@@ -91,61 +112,65 @@ body{
   margin-bottom: 20px;
 }
 
+.footer {
+  -webkit-border-radius: 13px;
+  border-radius: 13px;
+}
 
-#Gryffindor{
+#Gryffindor {
   background-color: red;
   color:gold;
 }
 
-#Hufflepuff{background-color: yellow;
+#Hufflepuff {background-color: yellow;
   color: black;
 }
 
-#Ravenclaw{
+#Ravenclaw {
   background-color: blue;
   color: #CD7F32;  /*bronze */
 }
 
-#Slytherin{
+#Slytherin {
   background-color: green;
   color: silver;
 }
 
-.Gryffindor{
+.Gryffindor {
   background-color: #650000;
   color: #e09c09;
   -webkit-border-radius: 13px;
   border-radius: 13px;
   background: #650000;
-  -webkit-box-shadow: 13px 13px 24px #560000, -13px -13px 24px #740000;
-  box-shadow: 13px 13px 24px #560000, -13px -13px 24px #740000;
+  -webkit-box-shadow: 13px 13px 24px #be8508, -13px -13px 24px #ffb30a;
+  box-shadow: 13px 13px 24px #be8508, -13px -13px 24px #ffb30a;
 }
 
-.Hufflepuff{background-color: #ff9d0b;
+.Hufflepuff {background-color: #ff9d0b;
   color: #1f1e19;
   -webkit-border-radius: 13px;
   border-radius: 13px;
-  background: #ffdb00;
-  -webkit-box-shadow: 13px 13px 24px #d9ba00, -13px -13px 24px #fffc00;
-  box-shadow: 13px 13px 24px #d9ba00, -13px -13px 24px #fffc00;
+  background: #e09c09;
+  -webkit-box-shadow: 13px 13px 24px #1a1a15, -13px -13px 24px #24231d;
+  box-shadow: 13px 13px 24px #1a1a15, -13px -13px 24px #24231d;
 }
 
-.Ravenclaw{
+.Ravenclaw {
   background-color: #1a3956;
   color: #8e501d;
   -webkit-border-radius: 13px;
   border-radius: 13px;
   background: #1a3956;
-  -webkit-box-shadow: 13px 13px 24px #163049, -13px -13px 24px #1e4263;
-  box-shadow: 13px 13px 24px #163049, -13px -13px 24px #1e4263;
+  -webkit-box-shadow: 13px 13px 24px #794419, -13px -13px 24px #a35c21;
+  box-shadow: 13px 13px 24px #794419, -13px -13px 24px #a35c21;
 }
 
-.Slytherin{
+.Slytherin {
   background-color: #2f751c;
   color: #cccccc;
   -webkit-border-radius: 13px;
   border-radius: 13px;
   background: #2f751c;
-  -webkit-box-shadow: 13px 13px 24px #286318, -13px -13px 24px #368720;
-  box-shadow: 13px 13px 24px #286318, -13px -13px 24px #368720;
+  -webkit-box-shadow: 13px 13px 24px #adadad, -13px -13px 24px #ebebeb;
+  box-shadow: 13px 13px 24px #adadad, -13px -13px 24px #ebebeb;
 }

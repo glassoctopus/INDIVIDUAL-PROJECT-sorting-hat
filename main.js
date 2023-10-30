@@ -11,29 +11,33 @@ const houses = [
 
 const form = document.querySelector("form")
 
-const app = document.querySelector("#app");
-console.log("is the quereySelector to app working ==>> ",app);
+const hogwarts = document.querySelector("#hogwarts");
+const voldys = document.querySelector("#voldys")
+
+console.log("is the quereySelector to hogwarts working ==>> ", hogwarts);
 // 
 
 const renderToDom = (array) => {
   console.log("In js render to dom function")
     let domString = "";
     for(object of array) {
-      domString += `<div class="${object.house}">
-      </div><div class="card element text-center myCardStyle ${object.house}" style="width: 20rem;">
-      <div class="card-header"><h5 class="card-title">${object.name}</h5></div>
-      <img src="${object.imageUrl}" class="card-img-top img" alt="...">
-      <div class="card-body">        
-          <p class="card-text">House: ${object.house}</p>
-          <p>House color: ${object.color}</p>        
-          <button id="delete--${object.id}" onclick="
-          ">Expel</button>
+      domString += `
+      <div class="${object.house}">
         </div>
-        <div class="card-footer ${object.house}"><p>${object.name}</p></div>
+          <div class="card element text-center myCardStyle ${object.house}" style="width: 20rem;">
+            <div class="card-header"><h5 class="card-title">${object.name}</h5></div>
+            <!-- <img src="${object.imageUrl}" class="card-img-top img" alt="no image needed for mvp"> -->
+            <div class="card-body">        
+            <p class="card-text">House: ${object.house}</p>
+            <p>House color: ${object.color}</p>        
+            <button id="delete--${object.id}" onclick="">Expel</button>          
+            <div class="card-footer footer ${object.house}"><p>${object.name}</p></div>
+          </div>
         </div>
       </div>`
     };
-    app.innerHTML = domString;
+    hogwarts.innerHTML = domString;
+    
   };
 
 //variables that need to be refatored into a function with their respective actions. 
@@ -41,29 +45,19 @@ const renderToDom = (array) => {
 
 form.addEventListener('submit', (event) =>{
   event.preventDefault();
-  console.log(event);
-  console.log("we should be about to make a new card student object")
-  const newStudent = document.querySelector('#sName').value;
-  console.log("New student Name Entered ==> ",newStudent);
-  const indexForThisStudent = Math.floor(Math.random() * houses.length);
-  console.log("random index ==> ", indexForThisStudent);
-  const thisId = studentWizards.length + 1 + Math.random();
-  console.log("random id generator ==> ", thisId);
+ 
+  const newStudent = document.querySelector('#sName').value; // name on form TODO: validation
+  const indexForThisStudent = Math.floor(Math.random() * houses.length); // <== random index for house determination
+  const thisId = studentWizards.length + 1 + Math.random(); // unique ID for "data base 'air quotes'"
   const thisHouse = houses[indexForThisStudent][0];
-  console.log("House ==> ") //, houses[indexForThisStudent][0]);
   const thisHouseColor = houses[indexForThisStudent][1];
-  console.log("Color ==> ", houses[indexForThisStudent][1]);
-  
-  
-  console.log(indexForThisStudent);
-  console.log(houses[indexForThisStudent][0]);
-  console.log(houses[indexForThisStudent][1]);
-  
+
   const newWizObj ={
     id: thisId,
     name: document.querySelector("#sName").value,
     house: houses[indexForThisStudent][0],
     color: houses[indexForThisStudent][1],
+    expeled: false,
   }
   console.log(newWizObj);
   studentWizards.unshift(newWizObj);
@@ -72,6 +66,8 @@ form.addEventListener('submit', (event) =>{
   form.reset();
 }
 );
+
+
 
 function openForm() {
   document.getElementById("myForm").style.display = "block";
