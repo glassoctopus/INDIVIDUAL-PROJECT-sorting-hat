@@ -43,6 +43,7 @@ const renderToDom = (array) => {
       console.log("Object ID ==> ",object.id)
       console.log(hogwarts);
     }else{
+      console.log(object);
       voldy += `
       <div class="${object.house}">
           </div>
@@ -70,7 +71,7 @@ form.addEventListener('submit', (event) =>{
   event.preventDefault();
  
   const newStudent = document.querySelector('#sName').value; // name on form TODO: validation
-  const indexForThisStudent = Math.floor(Math.random() * houses.length); // <== random index for house determination
+  const indexForThisStudent = Math.floor(Math.random() * houses.length-1); // <== random index for house determination
   const thisId = studentWizards.length + 1 + Math.random(); // unique ID for "data base 'air quotes'"
   const thisHouse = houses[indexForThisStudent][0];
   const thisHouseColor = houses[indexForThisStudent][1];
@@ -86,6 +87,7 @@ form.addEventListener('submit', (event) =>{
   studentWizards.unshift(newWizObj);
   console.log(studentWizards);
   renderToDom(studentWizards);
+  renderToDom(expelled);
   form.reset();
 }
 );

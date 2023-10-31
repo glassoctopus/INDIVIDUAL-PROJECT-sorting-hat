@@ -136,6 +136,12 @@ body{
   color: silver;
 }
 
+#Voldomort {
+  background-color: #010101;
+  color: #cccccc;
+  ;
+}
+
 .Gryffindor {
   background-color: #650000;
   color: #e09c09;
@@ -176,8 +182,8 @@ body{
 }
 
 .Voldomort {
-  background-color: black;
-  color: #cccccc;
+  background-color: darkslategray;
+  color: lightgray;
   -webkit-border-radius: 13px;
   border-radius: 13px;
   background: #010101;
