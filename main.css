@@ -174,3 +174,13 @@ body{
   -webkit-box-shadow: 13px 13px 24px #adadad, -13px -13px 24px #ebebeb;
   box-shadow: 13px 13px 24px #adadad, -13px -13px 24px #ebebeb;
 }
+
+.Voldomort {
+  background-color: black;
+  color: #cccccc;
+  -webkit-border-radius: 13px;
+  border-radius: 13px;
+  background: #010101;
+  -webkit-box-shadow: 13px 13px 24px #adadad, -13px -13px 24px #ebebeb;
+  box-shadow: 13px 13px 24px #adadad, -13px -13px 24px #ebebeb;
+}
