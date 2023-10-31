@@ -28,7 +28,7 @@ const renderToDom = (array) => {
         hogwart += `
         <div class="${object.house}">
           </div>
-            <div class="card element text-center myCardStyle ${object.house}" style="width: 20rem;">
+            <div class="card text-center myCardStyle ${object.house}" style="width: 20rem;">
               <div class="card-header"><h5 class="card-title">${object.name}</h5></div>
               <!-- <img src="${object.imageUrl}" class="card-img-top img" alt="no image needed for mvp"> -->
               <div class="card-body">        
@@ -43,13 +43,16 @@ const renderToDom = (array) => {
       console.log("Object ID ==> ",object.id)
       console.log(hogwarts);
     }else{
-      console.log(object);
+      console.log(" in the expel html render loop", object);
+      console.log("", );
+      console.log("", );
+      console.log("", );
       voldy += `
       <div class="${object.house}">
           </div>
-            <div class="card element text-center myCardStyle ${object.house}" style="width: 20rem;">
+            <div class="card text-center myCardStyle ${object.house}" style="width: 20rem;">
               <div class="card-header"><h5 class="card-title">${object.name}</h5></div>
-              <!-- <img src="${object.imageUrl}" class="card-img-top img" alt="no image needed for mvp"> -->
+              <!-- <img src="${object.imageUrl}" class="card-img-top img" alt="no image needed for mvp"> --picture or not? -->
               <div class="card-body">        
               <p class="card-text">House: ${object.house}</p>
               <p>House color: ${object.color}</p>        
