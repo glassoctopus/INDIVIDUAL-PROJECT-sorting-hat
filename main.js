@@ -23,7 +23,7 @@ const renderToDom = (array) => {
     let hogwart = "";
     let voldy = "";
     for(object of array) {
-      if(object.expeled == false){
+      if(object.expelled == false){
         console.log("in the hogwarts conditional should be making the string")
         hogwart += `
         <div class="${object.house}">
@@ -44,9 +44,9 @@ const renderToDom = (array) => {
       console.log(hogwarts);
     }else{
       console.log(" in the expel html render loop", object);
-      console.log("", );
-      console.log("", );
-      console.log("", );
+      console.log("is the object name getting passed in the expel html renderer", object.name);
+      console.log("is the object house getting passed in the expel html renderer", object.house);
+      console.log("is the object color getting passed in the expel html renderer", object.color);
       voldy += `
       <div class="${object.house}">
           </div>
@@ -73,18 +73,18 @@ const renderToDom = (array) => {
 form.addEventListener('submit', (event) =>{
   event.preventDefault();
  
-  const newStudent = document.querySelector('#sName').value; // name on form TODO: validation
+ //  const newStudent = document.querySelector('#sName').value; // name on form TODO: validation
   const indexForThisStudent = Math.floor(Math.random() * houses.length-1); // <== random index for house determination
   const thisId = studentWizards.length + 1 + Math.random(); // unique ID for "data base 'air quotes'"
-  const thisHouse = houses[indexForThisStudent][0];
-  const thisHouseColor = houses[indexForThisStudent][1];
+ // const thisHouse = houses[indexForThisStudent][0];
+ // const thisHouseColor = houses[indexForThisStudent][1];
 
   const newWizObj ={
     id: thisId,
     name: document.querySelector("#sName").value,
     house: houses[indexForThisStudent][0],
     color: houses[indexForThisStudent][1],
-    expeled: false,
+    expelled: false,
   }
   console.log(newWizObj);
   studentWizards.unshift(newWizObj);
@@ -108,10 +108,11 @@ hogwarts.addEventListener("click",  (event) => {
     const index = studentWizards.findIndex(obj => obj.id === Number(id));
     console.log(index);
     studentWizards[index].house = "Voldomort";
-    studentWizards[index].expeled = true;
+    studentWizards[index].expelled = true;
     //re-render with the array
-    expelled.unshift(studentWizards.splice(index, 1));
-    studentWizards.includes
+    expelled.unshift(studentWizards.splice(index, 1)[0]);
+    console.log(expelled);
+    //studentWizards.includes
     //render with removal in place
     renderToDom(expelled);
     renderToDom(studentWizards);
