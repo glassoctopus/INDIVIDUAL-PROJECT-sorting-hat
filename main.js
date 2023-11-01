@@ -23,7 +23,7 @@ const renderToDom = (array) => {
     let hogwart = "";
     let voldy = "";
     for(object of array) {
-      if(object.expelled == false){
+      if(object.expelled == false || studentWizards.length > 0){
         console.log("in the hogwarts conditional should be making the string")
         hogwart += `
         <div class="${object.house}">
@@ -42,7 +42,7 @@ const renderToDom = (array) => {
       hogwarts.innerHTML = hogwart;
       console.log("Object ID ==> ",object.id)
       console.log(hogwarts);
-    }else{
+    }else if(object.expelled == true){
       console.log(" in the expel html render loop", object);
       console.log("is the object name getting passed in the expel html renderer", object.name);
       console.log("is the object house getting passed in the expel html renderer", object.house);
@@ -60,11 +60,11 @@ const renderToDom = (array) => {
             </div>
           </div>
         </div>
-      `
-      console.log("ID should equal==> ","Expel--", object.id);  
-    }
-    voldys.innerHTML = voldy;    
-  };
+      `      
+      console.log("ID should equal==> ","Expel--", object.id);
+      voldys.innerHTML = voldy; 
+    } 
+  }
 };
 
 //variables that need to be refatored into a function with their respective actions. 
@@ -111,6 +111,11 @@ hogwarts.addEventListener("click",  (event) => {
     studentWizards[index].expelled = true;
     //re-render with the array
     expelled.unshift(studentWizards.splice(index, 1)[0]);
+    console.log(studentWizards.length)
+    if(studentWizards.length == 0){
+      hogwarts.remove();
+      console.log("did i remove the hogwarts HTML???!?!?!?")
+    } 
     console.log(expelled);
     //studentWizards.includes
     //render with removal in place
