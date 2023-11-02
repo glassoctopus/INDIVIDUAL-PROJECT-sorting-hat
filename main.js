@@ -123,8 +123,8 @@ const renderToDom = (array) => {
               <div class="card-header"><h5 class="card-title">${object.name}</h5></div>
               <!-- <img src="${object.imageUrl}" class="card-img-top img" alt="no image needed for mvp"> --picture or not? -->
               <div class="card-body">        
-              <p class="card-text">House: ${object.house}</p>
-              <p>House color: ${object.color}</p>        
+              <p class="card-text">Under: ${object.house}</p>
+              <p>A ${object.color}</p>        
               <div class="card-footer footer ${object.house}"><p>${object.name}</p></div>
             </div>
           </div>
@@ -143,7 +143,7 @@ const filter = (house) => {
     return renderToDom(studentWizards);
   }else{
     for(student of studentWizards){
-      if(student.type === house){
+      if(student.house === house){
         studentArray.unshift(student);
       }
     }
