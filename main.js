@@ -3,6 +3,83 @@ console.log("Hat Sort Connected");
 let studentWizards = [];
 let expelled = [];
 
+const testArray = [
+  {
+    id: 10.296241961328007,
+    name: "Harry Potter",
+    house: "Gryffindor",
+    color: "red",
+    expelled: false,
+  },
+  {
+    id: 11.171564262461259,
+    name: "Hermione Granger",
+    house: "Gryffindor",
+    color: "red",
+    expelled: false,
+  },
+  {
+    id: 12.958045101205968,
+    name: "Ron Weasley",
+    house: "Gryffindor",
+    color: "red",
+    expelled: false,
+  },
+  {
+    id: 13.280328465851986,
+    name: "Draco Malfoy",
+    house: "Slytherin",
+    color: "green",
+    expelled: false,
+  },
+  {
+    id: 14.205620248080786,
+    name: "Luna Lovegood",
+    house: "Ravenclaw",
+    color: "blue",
+    expelled: false,
+  },
+  {
+    id: 15.402657848874255,
+    name: "Cho Chang",
+    house: "Ravenclaw",
+    color: "blue",
+    expelled: false,
+  },
+  {
+    id: 16.795191168709645,
+    name: "Cedric Diggory",
+    house: "Hufflepuff",
+    color: "yellow",
+    expelled: false,
+  },
+  {
+    id: 17.296241961328007,
+    name: "Severus Snape",
+    house: "Slytherin",
+    color: "green",
+    expelled: false,
+  },
+  {
+    id: 18.0310624973152325,
+    name: "Bellatrix Lestrange",
+    house: "Slytherin",
+    color: "green",
+    expelled: false,
+  },
+  {
+    id: 19.4196132973152325,
+    name: "Susan Bones",
+    house: "Hufflepuff ",
+    color: "yellow",
+    expelled: false,
+  }
+];
+
+ Array.prototype.push.apply(studentWizards,testArray);
+ console.log(studentWizards);
+ 
+
 const houses = [
   ["Gryffindor", "red", "#740001",  "#AE0001", "#d3a625", "#eeba30", "#000000"], 
   ["Hufflepuff", "yellow", "#ffdb00", "#ffed86", "#fff4b1", "#60605c", "#000000"],
@@ -13,18 +90,16 @@ const houses = [
 const form = document.querySelector("form")
 
 const hogwarts = document.querySelector("#hogwarts");
-const voldys = document.querySelector("#voldys")
+const voldys = document.querySelector("#voldys");
+const filterButtons = document.querySelector("#filter-buttons");
 
-console.log("is the quereySelector to hogwarts working ==>> ", hogwarts);
 // 
 
 const renderToDom = (array) => {
-  console.log("In js render to dom function")
     let hogwart = "";
     let voldy = "";
     for(object of array) {
       if(object.expelled == false || studentWizards.length > 0){
-        console.log("in the hogwarts conditional should be making the string")
         hogwart += `
         <div class="${object.house}">
           </div>
@@ -40,13 +115,8 @@ const renderToDom = (array) => {
           </div>
         </div>`    
       hogwarts.innerHTML = hogwart;
-      console.log("Object ID ==> ",object.id)
-      console.log(hogwarts);
     }else if(object.expelled == true){
-      console.log(" in the expel html render loop", object);
-      console.log("is the object name getting passed in the expel html renderer", object.name);
-      console.log("is the object house getting passed in the expel html renderer", object.house);
-      console.log("is the object color getting passed in the expel html renderer", object.color);
+      console.log("voldomort object in expelled==> ", object);
       voldy += `
       <div class="${object.house}">
           </div>
@@ -61,23 +131,48 @@ const renderToDom = (array) => {
           </div>
         </div>
       `      
-      console.log("ID should equal==> ","Expel--", object.id);
       voldys.innerHTML = voldy; 
     } 
   }
 };
 
-//variables that need to be refatored into a function with their respective actions. 
+renderToDom(studentWizards);
+
+const filter = (house) => {
+  let studentArray = [];
+  if(house === "all"){
+    return renderToDom(studentWizards);
+  }else{
+    for(student of studentWizards){
+      if(student.type === house){
+        studentArray.unshift(student);
+      }
+    }
+  }
+  hogwarts.innerHTML = "";
+  console.log(studentArray);
+  renderToDom(studentArray);
+}
+
+filterButtons.addEventListener("click", (event) => {
+    
+  const id = event.target.id;
+  console.log(event, id);
+
+  if(id === "all"){
+    renderToDom(studentWizards);
+  }else if(id === "Gryffindor" || id === "Hufflepuff" || id === "Ravenclaw" || id === "Slytherin"){
+    filter(id);
+    console.log("here is your  id "+id+" ")
+  }
+})
 
 
 form.addEventListener('submit', (event) =>{
   event.preventDefault();
  
- //  const newStudent = document.querySelector('#sName').value; // name on form TODO: validation
-  const indexForThisStudent = Math.floor(Math.random() * houses.length-1); // <== random index for house determination
-  const thisId = studentWizards.length + 1 + Math.random(); // unique ID for "data base 'air quotes'"
- // const thisHouse = houses[indexForThisStudent][0];
- // const thisHouseColor = houses[indexForThisStudent][1];
+  const indexForThisStudent = Math.floor(Math.random() * 4); 
+  const thisId = studentWizards.length + 1 + Math.random(); 
 
   const newWizObj ={
     id: thisId,
@@ -86,39 +181,30 @@ form.addEventListener('submit', (event) =>{
     color: houses[indexForThisStudent][1],
     expelled: false,
   }
-  console.log(newWizObj);
   studentWizards.unshift(newWizObj);
-  console.log(studentWizards);
   renderToDom(studentWizards);
-  renderToDom(expelled);
   form.reset();
 }
 );
 
 hogwarts.addEventListener("click",  (event) => {
-  console.log(event);
-  console.log("Expel function, we are in -batman voice");
   
   if(event.target.id.includes("Expel")){
-    //remove pet once we get the right button
-    //determine the correct object, get id
-    const [,id] = event.target.id.split("--");
-    //identify where in the array is it
-
+    console.log("expelled")
+    const [,id] = event.target.id.split("--");  //determine the correct object, get id
     const index = studentWizards.findIndex(obj => obj.id === Number(id));
-    console.log(index);
+
+    studentWizards[index].color = "former "  +  studentWizards[index].house;
+    console.log(studentWizards[index].color);
     studentWizards[index].house = "Voldomort";
     studentWizards[index].expelled = true;
-    //re-render with the array
+    
     expelled.unshift(studentWizards.splice(index, 1)[0]);
-    console.log(studentWizards.length)
-    if(studentWizards.length == 0){
-      hogwarts.remove();
-      console.log("did i remove the hogwarts HTML???!?!?!?")
-    } 
-    console.log(expelled);
-    //studentWizards.includes
-    //render with removal in place
+    console.log(studentWizards);
+    hogwarts.innerHTML = "";
+
+    console.log("array of voldy's students", expelled);
+   
     renderToDom(expelled);
     renderToDom(studentWizards);
   }
