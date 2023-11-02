@@ -99,7 +99,7 @@ const renderToDom = (array) => {
     let hogwart = "";
     let voldy = "";
     for(object of array) {
-      if(object.expelled == false || studentWizards.length > 0){
+      if(object.expelled == false){
         hogwart += `
         <div class="${object.house}">
           </div>
@@ -116,7 +116,6 @@ const renderToDom = (array) => {
         </div>`    
       hogwarts.innerHTML = hogwart;
     }else if(object.expelled == true){
-      console.log("voldomort object in expelled==> ", object);
       voldy += `
       <div class="${object.house}">
           </div>
@@ -205,8 +204,8 @@ hogwarts.addEventListener("click",  (event) => {
 
     console.log("array of voldy's students", expelled);
    
-    renderToDom(expelled);
     renderToDom(studentWizards);
+    renderToDom(expelled);
   }
 })
 
