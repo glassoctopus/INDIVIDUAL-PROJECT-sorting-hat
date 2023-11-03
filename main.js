@@ -198,19 +198,14 @@ const events = () => {
   });
 }
 
-const filter = (house) => {
+const filter = (thisHouse) => {
   let studentArray = [];
-  if(house === "all"){
+  if(thisHouse === "all"){
     return renderToDom(studentWizards);
   }else{
-    for(student of studentWizards){
-      if(student.house === house){
-        studentArray.unshift(student);
-      }
-    }
+    studentArray = studentWizards.filter(student => student.house == thisHouse);
   }
   hogwarts.innerHTML = "";
-  console.log(studentArray);
   renderToDom(studentArray);
 }
 
