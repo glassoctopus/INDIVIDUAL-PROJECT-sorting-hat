@@ -36,8 +36,8 @@
 
 <div class="Display">
   <!-- A button to open the popup form -->   
-<button type="button" class="btn btn-primary center" onclick="openForm()">open Form</button>
-
+<button type="button" id="openForm" class="btn btn-primary center">open Form</button>
+<!-- onclick="openForm()" -->
 <div class="center" id="filter-buttons">
  
   <button type="button" id="Gryffindor" class="btn btns" style="color: white;">Gryffindor</button>
@@ -50,15 +50,15 @@
 <div id="welcome">
   <!-- The form -->
     <div class="form-popup" id="myForm">
-      <form class="form-container">
+      <form class="form-container" id="form">
         <h1>New Student</h1>
               
         <label for="sName"><b>Student Name</b></label>
         <input type="text" id="sName" placeholder="Enter your name, 1st year" name="sName" required>
         <div id="sName" class="form-text">What's your name ?</div>
         
-        <button type="submit" class="btn" onclick="closeForm()">find your house</button>
-        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        <button type="submit" class="btn">find your house</button>
+        <button type="button" id="closeForm" class="btn cancel">Close</button>
       </form>
     </div>
   </div>

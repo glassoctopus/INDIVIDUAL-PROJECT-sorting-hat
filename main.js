@@ -76,25 +76,6 @@ const testArray = [
   }
 ];
 
- Array.prototype.push.apply(studentWizards,testArray);
- console.log(studentWizards);
- 
-
-const houses = [
-  ["Gryffindor", "red", "#740001",  "#AE0001", "#d3a625", "#eeba30", "#000000"], 
-  ["Hufflepuff", "yellow", "#ffdb00", "#ffed86", "#fff4b1", "#60605c", "#000000"],
-  ["Ravenclaw", "blue", "#0e1a41", "#222f5b", "#5d5d5d", "#946b2d", "#000000",], 
-  ["Slytherin", "green", "yellow", "#1A472A", "#2a623d", "#5d5d5d", "#aaaaaa", "#000000"],
-  ["Voldomort", "black", "silver"]];
-
-const form = document.querySelector("form")
-
-const hogwarts = document.querySelector("#hogwarts");
-const voldys = document.querySelector("#voldys");
-const filterButtons = document.querySelector("#filter-buttons");
-
-// 
-
 const renderToDom = (array) => {
     let hogwart = "";
     let voldy = "";
@@ -135,7 +116,87 @@ const renderToDom = (array) => {
   }
 };
 
-renderToDom(studentWizards);
+const events = () => {
+  const form = document.querySelector("form")
+  const hogwarts = document.querySelector("#hogwarts");
+  const voldys = document.querySelector("#voldys");
+  const filterButtons = document.querySelector("#filter-buttons");
+  const submitBtn = document.querySelector("#openForm")
+  const houses = [
+    ["Gryffindor", "red", "#740001",  "#AE0001", "#d3a625", "#eeba30", "#000000"], 
+    ["Hufflepuff", "yellow", "#ffdb00", "#ffed86", "#fff4b1", "#60605c", "#000000"],
+    ["Ravenclaw", "blue", "#0e1a41", "#222f5b", "#5d5d5d", "#946b2d", "#000000",], 
+    ["Slytherin", "green", "yellow", "#1A472A", "#2a623d", "#5d5d5d", "#aaaaaa", "#000000"],
+    ["Voldomort", "black", "silver"]];
+
+  form.addEventListener('click', (event) => {
+    if(event.target.id == "closeForm"){
+    document.getElementById("myForm").style.display = "none";
+    }
+  });
+
+  submitBtn.addEventListener('click', (event) => {
+    if(event.target.id == "openForm"){
+    document.getElementById("myForm").style.display = "block";
+    }
+  });
+
+  form.addEventListener('submit', (event) =>{
+    event.preventDefault();
+    console.log("are we in here form submit")   
+    const indexForThisStudent = Math.floor(Math.random() * 4); 
+    const thisId = studentWizards.length + 1 + Math.random(); 
+  
+    const newWizObj ={
+      id: thisId,
+      name: document.querySelector("#sName").value,
+      house: houses[indexForThisStudent][0],
+      color: houses[indexForThisStudent][1],
+      expelled: false,
+    }
+    console.log(newWizObj);
+    studentWizards.unshift(newWizObj);
+    renderToDom(studentWizards);
+    form.reset();
+    document.getElementById("myForm").style.display = "none";
+  });
+
+  filterButtons.addEventListener("click", (event) => {
+    
+    const id = event.target.id;
+    console.log(event, id);
+  
+    if(id === "all"){
+      renderToDom(studentWizards);
+    }else if(id === "Gryffindor" || id === "Hufflepuff" || id === "Ravenclaw" || id === "Slytherin"){
+      filter(id);
+      console.log("here is your  id "+id+" ")
+    }
+  });
+
+  hogwarts.addEventListener("click",  (event) => {
+  
+    if(event.target.id.includes("Expel")){
+      console.log("expelled")
+      const [,id] = event.target.id.split("--");  //determine the correct object, get id
+      const index = studentWizards.findIndex(obj => obj.id === Number(id));
+  
+      studentWizards[index].color = "former "  +  studentWizards[index].house;
+      console.log(studentWizards[index].color);
+      studentWizards[index].house = "Voldomort";
+      studentWizards[index].expelled = true;
+      
+      expelled.unshift(studentWizards.splice(index, 1)[0]);
+      console.log(studentWizards);
+      hogwarts.innerHTML = "";
+  
+      console.log("array of voldy's students", expelled);
+     
+      renderToDom(studentWizards);
+      renderToDom(expelled);
+    }
+  });
+}
 
 const filter = (house) => {
   let studentArray = [];
@@ -153,66 +214,11 @@ const filter = (house) => {
   renderToDom(studentArray);
 }
 
-filterButtons.addEventListener("click", (event) => {
-    
-  const id = event.target.id;
-  console.log(event, id);
-
-  if(id === "all"){
-    renderToDom(studentWizards);
-  }else if(id === "Gryffindor" || id === "Hufflepuff" || id === "Ravenclaw" || id === "Slytherin"){
-    filter(id);
-    console.log("here is your  id "+id+" ")
-  }
-})
-
-
-form.addEventListener('submit', (event) =>{
-  event.preventDefault();
- 
-  const indexForThisStudent = Math.floor(Math.random() * 4); 
-  const thisId = studentWizards.length + 1 + Math.random(); 
-
-  const newWizObj ={
-    id: thisId,
-    name: document.querySelector("#sName").value,
-    house: houses[indexForThisStudent][0],
-    color: houses[indexForThisStudent][1],
-    expelled: false,
-  }
-  studentWizards.unshift(newWizObj);
+function init(){
+  events();
+  Array.prototype.push.apply(studentWizards,testArray);
   renderToDom(studentWizards);
-  form.reset();
-}
-);
 
-hogwarts.addEventListener("click",  (event) => {
-  
-  if(event.target.id.includes("Expel")){
-    console.log("expelled")
-    const [,id] = event.target.id.split("--");  //determine the correct object, get id
-    const index = studentWizards.findIndex(obj => obj.id === Number(id));
-
-    studentWizards[index].color = "former "  +  studentWizards[index].house;
-    console.log(studentWizards[index].color);
-    studentWizards[index].house = "Voldomort";
-    studentWizards[index].expelled = true;
-    
-    expelled.unshift(studentWizards.splice(index, 1)[0]);
-    console.log(studentWizards);
-    hogwarts.innerHTML = "";
-
-    console.log("array of voldy's students", expelled);
-   
-    renderToDom(studentWizards);
-    renderToDom(expelled);
-  }
-})
-
-function openForm() {
-  document.getElementById("myForm").style.display = "block";
 }
 
-function closeForm() {
-  document.getElementById("myForm").style.display = "none";
-}
+init();
